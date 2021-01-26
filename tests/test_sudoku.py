@@ -2,7 +2,7 @@ import io
 
 import numpy as np
 
-from .helpers import sudoku
+import xudoku
 
 
 def check(con_matrix):
@@ -15,7 +15,7 @@ def check(con_matrix):
 
 
 def test_solving_mini_sudoku():
-    sudo = sudoku.Sudoku(4)
+    sudo = xudoku.Sudoku(4)
     sudo.read(
         io.StringIO("1,0,0,0\n0,0,3,0\n0,2,0,0\n0,0,0,4\n"), False
     )  # 4 in bottom-right essential (tests overflow)
@@ -27,7 +27,7 @@ def test_solving_mini_sudoku():
 
 
 def test_solving_empty_mini_sudoku():
-    sudo = sudoku.Sudoku(4)
+    sudo = xudoku.Sudoku(4)
     sudo._sudo = np.zeros((4, 4), dtype="int")
     con_matrix = sudo._translate_into_constraint_matrix()
     # A hard-coded checksum of the output.
@@ -37,7 +37,7 @@ def test_solving_empty_mini_sudoku():
 
 
 def test_solving_trivial_sudoku():
-    sudo = sudoku.Sudoku(9)
+    sudo = xudoku.Sudoku(9)
     sudo.read(
         io.StringIO(
             "0,3,5,2,9,0,8,6,4\n0,8,2,4,1,0,7,0,3\n7,6,4,3,8,0,0,9,0\n2,1,8,7,3,9,0,4,0\n0,0,0,8,0,4,2,3,0\n0,4,3,0,5,2,9,7,0\n4,0,6,5,7,1,0,0,9\n3,5,9,0,2,8,4,1,7\n8,0,0,9,0,0,5,2,6\n"  # noqa: E501
@@ -59,7 +59,7 @@ def test_solving_trivial_sudoku():
 
 
 def test_solving_easy_sudoku():
-    sudo = sudoku.Sudoku(9)
+    sudo = xudoku.Sudoku(9)
     sudo.read(
         io.StringIO(
             "0,0,0,0,7,4,5,6,0\n5,0,0,2,1,8,3,0,0\n0,4,0,0,6,0,2,7,1\n6,9,0,3,2,5,1,8,0\n0,5,0,0,8,0,9,3,6\n0,7,0,6,0,1,4,2,5\n0,0,3,0,5,0,6,0,0\n0,0,0,8,0,0,0,0,0\n9,2,0,0,0,6,0,1,0\n"  # noqa: E501
@@ -82,7 +82,7 @@ def test_solving_easy_sudoku():
 
 
 def test_solving_medium_sudoku():
-    sudo = sudoku.Sudoku(9)
+    sudo = xudoku.Sudoku(9)
     sudo.read(
         io.StringIO(
             "9,0,5,2,0,0,0,3,0\n0,0,0,1,0,3,0,0,6\n0,0,0,4,5,6,0,9,0\n0,4,0,0,8,0,6,0,0\n0,5,0,3,0,1,0,4,0\n0,0,2,0,6,0,0,1,0\n0,2,0,6,1,7,0,0,0\n3,0,0,5,0,9,0,0,0\n0,9,0,0,0,2,7,0,4\n"  # noqa: E501
@@ -105,7 +105,7 @@ def test_solving_medium_sudoku():
 
 
 def test_solving_hard_sudoku():
-    sudo = sudoku.Sudoku(9)
+    sudo = xudoku.Sudoku(9)
     sudo.read(
         io.StringIO(
             "0,3,0,0,0,8,0,0,0\n0,5,0,9,0,0,3,0,1\n2,0,7,0,0,0,0,4,0\n0,0,0,0,7,0,1,0,0\n5,0,8,0,3,0,4,0,9\n0,0,1,0,8,0,0,0,0\n0,8,0,0,0,0,7,0,6\n7,0,3,0,0,6,0,2,0\n0,0,0,4,0,0,0,3,0\n"  # noqa: E501
@@ -128,7 +128,7 @@ def test_solving_hard_sudoku():
 
 
 def test_solving_very_hard_sudoku():
-    sudo = sudoku.Sudoku(9)
+    sudo = xudoku.Sudoku(9)
     sudo.read(
         io.StringIO(
             "8,1,9,0,7,0,0,0,6\n0,0,0,9,0,0,5,0,0\n0,0,0,0,0,4,0,8,0\n0,5,2,6,0,0,0,0,0\n3,0,0,0,0,0,0,0,5\n0,0,0,0,0,9,2,1,0\n0,7,0,8,0,0,0,0,0\n0,0,6,0,0,3,0,0,0\n2,0,0,0,6,0,9,4,7\n"  # noqa: E501
@@ -151,14 +151,14 @@ def test_solving_very_hard_sudoku():
 
 
 def test_solving_impossible_sudoku():
-    sudo = sudoku.Sudoku(4)
+    sudo = xudoku.Sudoku(4)
     sudo.read(io.StringIO("1,1,1,1\n1,1,1,1\n1,1,1,1\n1,1,1,1\n"), False)
     sol = sudo.solve()
     assert sol is None
 
 
 def test_solving_easy_sudoku_from_csv():
-    sudo = sudoku.Sudoku(9)
+    sudo = xudoku.Sudoku(9)
     with open("tests/files/insight.csv", "r") as f:
         sudo.read(f, True)
     sol = sudo.solve()
@@ -177,7 +177,7 @@ def test_solving_easy_sudoku_from_csv():
 
 
 def test_solving_very_hard_sudoku_from_csv():
-    sudo = sudoku.Sudoku(9)
+    sudo = xudoku.Sudoku(9)
     with open("tests/files/very-hard.csv", "r") as f:
         sudo.read(f, True)
     sol = sudo.solve()
