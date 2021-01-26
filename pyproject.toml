@@ -6,11 +6,15 @@ authors = ["Moy Easwaran"]
 license = "GNU GPL v2.0"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.7.1"
 exact-cover = "^0.4.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
+
+[tool.poetry.scripts]
+test = 'run_tests:test'
+doctest = 'run_tests:run_doctest'
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
