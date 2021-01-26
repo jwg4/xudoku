@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "sudoku"
-version = "0.1.0"
+name = "xudoku"
+version = "0.1.1-alpha.0"
 description = "Solve sudoku using an 'exact cover' algorithm."
 authors = ["Moy Easwaran"]
 license = "GNU GPL v2.0"
