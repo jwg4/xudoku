@@ -19,8 +19,8 @@ jobs:
         run: pip install poetry
       - name: Install requirements
         run: poetry install
-      - name: Test package
-        run: poetry run lint
+      - name: Lint Python code
+        run: poetry run black --check xudoku/ tests/
       - name: Test package
         run: poetry run test
       - name: Build package
