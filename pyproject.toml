@@ -11,6 +11,7 @@ exact-cover = "^0.4.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
+black = "^20.8b1"
 
 [tool.poetry.scripts]
 test = 'run_tests:test'
