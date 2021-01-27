@@ -1,4 +1,4 @@
-name: Deploy wheels to pypi
+name: Run tests, lint, build
 on: push
 
 

@@ -1,4 +1,4 @@
-name: Deploy wheels to pypi
+name: Deploy to pypi
 on:
   push:
     branches: 
@@ -25,7 +25,7 @@ jobs:
       - name: Lint Python code
         run: poetry run black --check xudoku/ tests/
       - name: Build package
-        run: poetry build -f wheel
+        run: poetry build
       - name: Test package
         run: poetry run test
       - name: publish to pypi
