@@ -1,9 +1,11 @@
 [tool.poetry]
 name = "xudoku"
-version = "0.2.1"
+version = "0.3.0-alpha.0"
 description = "Solve sudoku using an 'exact cover' algorithm."
 authors = ["Moy Easwaran"]
 license = "GNU GPL v2.0"
+readme = README.md
+repository = https://github.com/jwg4/xudoku
 
 [tool.poetry.dependencies]
 python = "^3.7.1"
