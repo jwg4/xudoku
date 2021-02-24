@@ -10,7 +10,7 @@ repository = "https://github.com/jwg4/xudoku"
 
 [tool.poetry.dependencies]
 python = "^3.7.1"
-exact-cover = "^0.4.1"
+exact-cover = "^0.4.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
