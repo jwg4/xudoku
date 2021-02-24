@@ -1,4 +1,4 @@
-name: Deploy to pypi
+name: Deploy prerelease to pypi
 on:
   push
 
