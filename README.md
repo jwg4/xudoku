@@ -16,3 +16,5 @@ I separated the code for the 'exact cover' algorithm (now available at https://g
 [[1, 3, 5, 2, 9, 7, 8, 6, 4], [9, 8, 2, 4, 1, 6, 7, 5, 3], [7, 6, 4, 3, 8, 5, 1, 9, 2], [2, 1, 8, 7, 3, 9, 6, 4, 5], [5, 9, 7, 8, 6, 4, 2, 3, 1], [6, 4, 3, 1, 5, 2, 9, 7, 8], [4, 2, 6, 5, 7, 1, 3, 8, 9], [3, 5, 9, 6, 2, 8, 4, 1, 7], [8, 7, 1, 9, 4, 3, 5, 2, 6]]
 >>> s._hardness
 'Easy'
+
+Currently the puzzle data can only be read from CSV. You could use `io.StringIO`, which turns a string into a file-like object, if you want to generate your sudoku puzzle in code.
