@@ -1,7 +1,7 @@
 # xudoku - Solve sudoku using an 'exact cover' algorithm
 [![PyPI version](https://badge.fury.io/py/xudoku.svg)](https://badge.fury.io/py/xudoku)
-![Run tests, lint, build](https://github.com/jwg4/polyomino/workflows/Run%20tests,%20lint,%20build/badge.svg)
-![Deploy to pypi](https://github.com/jwg4/polyomino/workflows/Deploy%20to%20pypi/badge.svg)
+![Run tests, lint, build](https://github.com/jwg4/xudoku/workflows/Run%20tests,%20lint,%20build/badge.svg)
+![Deploy to pypi](https://github.com/jwg4/polyomino/xudoku/Deploy%20to%20pypi/badge.svg)
 
 
 This is the sudoku code from @moygit's project 'exact_cover_np'.
