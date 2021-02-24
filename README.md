@@ -4,7 +4,7 @@ This is the sudoku code from @moygit's project 'exact_cover_np'.
 
 The package is maintained by me, @jwg4.
 
-I separated the code for the 'exact cover' algorithm (now available at https://github.com/jwg4/exact_cover) from the sudoku code and created this package.
+I separated the code for the 'exact cover' algorithm (now available at https://github.com/jwg4/exact_cover) from the sudoku code and created this package. At that package you can find more info about the exact cover algorithm, which can be used for lots of combinatoric problems.
 
 ## How to use the package
 ```
