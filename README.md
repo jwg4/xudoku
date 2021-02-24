@@ -17,4 +17,6 @@ I separated the code for the 'exact cover' algorithm (now available at https://g
 >>> s._hardness
 'Easy'
 
+```
+
 Currently the puzzle data can only be read from CSV. You could use `io.StringIO`, which turns a string into a file-like object, if you want to generate your sudoku puzzle in code.
