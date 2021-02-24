@@ -47,7 +47,7 @@ class Sudoku:
         sys.stderr.write("    CSV file and then call the program as follows:\n")
         sys.stderr.write("    {progname} < filename.csv\n".format(progname=sys.argv[0]))
 
-    def read(self, file_handle, want_rating):
+    def read(self, file_handle, want_rating=False):
         try:
             self._sudo = np.genfromtxt(
                 file_handle, delimiter=",", loose=False, dtype="int32"
