@@ -47,32 +47,31 @@ class Sudoku:
         sys.stderr.write("    CSV file and then call the program as follows:\n")
         sys.stderr.write("    {progname} < filename.csv\n".format(progname=sys.argv[0]))
 
-    def read(self, file_handle, want_rating=False):
+    def read(self, file_handle):
         try:
             self._sudo = np.genfromtxt(
                 file_handle, delimiter=",", loose=False, dtype="int32"
             )
         except IOError:
-            sys.stderr.write("Error: Unable to read file, sorry.\n")
+            logging.error("Unable to read file, sorry.\n")
             sys.exit(1)
         except ValueError:
-            sys.stderr.write(
-                "Error: CSV file should have integers between 1 and 9, inclusive.\n\n"
+            logging.error(
+                "CSV file should have integers between 1 and 9, inclusive.\n\n"
             )
             self._print_usage()
             sys.exit(1)
         if self._sudo.shape != (self._size, self._size):
-            sys.stderr.write("Error: Sudoku matrices are usually 9x9.\n")
+            logging.error("Sudoku matrices are usually 9x9.\n")
             sys.exit(1)
         if np.max(self._sudo) > 9 or np.min(self._sudo) < 0:
-            sys.stderr.write(
-                "Error: CSV file should have integers between 1 and 9, inclusive.\n"
+            logging.error(
+                "CSV file should have integers between 1 and 9, inclusive.\n"
             )
             sys.exit(1)
         self._constraint_matrix = self._translate_into_constraint_matrix()
         self._calculate_hardness()
-        if want_rating:
-            print("Rating: " + self._hardness)
+        logging.info("Rating: %s" % (self._hardness, ))
 
     def _calculate_hardness(self):
         # Roughly, the fewer choices the player has, the easier the puzzle.
@@ -112,7 +111,7 @@ class Sudoku:
             + entry
             - 1
         )
-        # print row, col, entry, ":", con_row, cell_con_col, row_con_col, col_con_col, box_con_col
+        logging.debug("%d, %d, %d: %d, %d, %d, %d, %d" % (row, col, entry, con_row, cell_con_col, row_con_col, col_con_col, box_con_col))
         constraints[con_row][cell_con_col] = 1
         constraints[con_row][row_con_col] = 1
         constraints[con_row][col_con_col] = 1
@@ -180,12 +179,14 @@ def main():
     sudo.read(sys.stdin, want_rating())
     solution = sudo.solve()
     if solution is None:
-        sys.stdout.write("No solutions!\n")
+        logging.INFO("No solutions!")
     else:
+        logging.INFO("Found a solution")
         solution.write(sys.stdout)
 
 
 # What should we do if there are no solutions?
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     main()
