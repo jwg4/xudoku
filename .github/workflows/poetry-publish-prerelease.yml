@@ -1,0 +1,55 @@
+name: Deploy prerelease to pypi
+on:
+  push
+
+jobs:
+  get_version:
+    runs-on: ubuntu-latest
+    outputs:
+      current_version: ${{ steps.output_version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install poetry
+        run: pip install poetry
+      - id: output_version
+        name: Output version
+        run: echo "::set-output name=version::"`poetry version | cut -d" " -f2`
+  check_version:
+    runs-on: ubuntu-latest
+    needs: get_version
+    outputs:
+      version_present: ${{ steps.check_present.outputs.present }}
+    steps:
+      - id: check_present
+        run: wget https://pypi.org/pypi/xudoku/${{ needs.get_version.outputs.current_version }}/json && echo "::set-output name=present::true" || echo "::set-output name=present::false"
+  validate:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install poetry
+        run: pip install poetry
+      - name: Install requirements
+        run: poetry install
+      - name: Lint Python code
+        run: poetry run black --check xudoku/ tests/
+      - name: Test package
+        run: poetry run test
+  publish:
+    needs: [validate, check_version]
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    if: needs.check_version.outputs.version_present == 'false'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: JRubics/poetry-publish@v1
+        with:
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
