@@ -65,13 +65,11 @@ class Sudoku:
             logging.error("Sudoku matrices are usually 9x9.\n")
             sys.exit(1)
         if np.max(self._sudo) > 9 or np.min(self._sudo) < 0:
-            logging.error(
-                "CSV file should have integers between 1 and 9, inclusive.\n"
-            )
+            logging.error("CSV file should have integers between 1 and 9, inclusive.\n")
             sys.exit(1)
         self._constraint_matrix = self._translate_into_constraint_matrix()
         self._calculate_hardness()
-        logging.info("Rating: %s" % (self._hardness, ))
+        logging.info("Rating: %s" % (self._hardness,))
 
     def _calculate_hardness(self):
         # Roughly, the fewer choices the player has, the easier the puzzle.
@@ -111,7 +109,19 @@ class Sudoku:
             + entry
             - 1
         )
-        logging.debug("%d, %d, %d: %d, %d, %d, %d, %d" % (row, col, entry, con_row, cell_con_col, row_con_col, col_con_col, box_con_col))
+        logging.debug(
+            "%d, %d, %d: %d, %d, %d, %d, %d"
+            % (
+                row,
+                col,
+                entry,
+                con_row,
+                cell_con_col,
+                row_con_col,
+                col_con_col,
+                box_con_col,
+            )
+        )
         constraints[con_row][cell_con_col] = 1
         constraints[con_row][row_con_col] = 1
         constraints[con_row][col_con_col] = 1
