@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xudoku"
-version = "1.0.0-alpha.0"
+version = "1.0.0"
 description = "Solve sudoku using an 'exact cover' algorithm."
 authors = ["Moy Easwaran"]
 maintainers = ["Jack Grahl <jack.grahl@gmail.com>"]
